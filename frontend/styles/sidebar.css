@@ -1,0 +1,183 @@
+.side-bar{
+  padding-top: 25px;
+  padding-bottom: 40px;
+  display: flex;
+  align-items: center;
+  font-size: 30px;
+  background-color: #1f373d;
+  width: 87px;
+  height:100vh;
+  flex-direction: column;
+  position: fixed;
+  left: -200px;
+  top: 0;
+  transition: left .65s ease-out;
+  z-index: 1000;
+}
+
+.side-bar.is-open{
+  left: 0;
+}
+.last-three{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 87px;
+  height: 65vh;
+}
+.side-bar button {
+  background-color: inherit;
+  padding: 0;
+  transition: .3s background-color;
+  height: 76px;
+  min-width: 76px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-container a, .lesson-container a{
+  width:100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.timer-container a:hover, .lesson-container a:hover{
+  background-color: #435152;
+}
+
+
+.lesson-container, .timer-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  cursor: pointer;
+}
+
+
+
+.lesson-container a button, .timer-container a button{
+  width: 100%;
+}
+
+#ai-container{
+  margin-top: 15px;
+  margin-bottom: 55px;
+}
+
+.timer-text, .lesson-text{
+  position: absolute;
+  top: 90px;
+  opacity: 0;
+  color: rgb(85, 85, 85);
+  font-size: 15px;
+  transition: opacity .15s;
+  font-family: Roboto;
+  font-size: 13px;
+  text-wrap: nowrap;
+  /* border: 1px solid black; */
+  padding: 2.8px;
+  background-color: white;
+  border-radius: 0px;
+  transition: opacity .6s;
+  cursor: url(); 
+}
+
+
+
+
+.lesson-text{
+  left: 6px;
+}
+
+.timer-container a:hover + .timer-text, .lesson-container a:hover + .lesson-text{
+    opacity: 1;
+}
+
+
+.timer-iconn, .lesson-iconn, .quizz-icon{
+  width: 48px; 
+  height: auto;
+}
+
+.ai-icon{
+  width: 60px;
+}
+
+.hamburger-button{
+  position: fixed;
+  left: 8px;
+  top: 0px;
+  width: 45px;
+  height: 40px;
+  cursor: pointer;
+  transition: left .66s ease ,background-color .35s ease; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0;
+  background-color: transparent;
+  z-index: 1001;
+}
+
+.hamburger-bg{
+  background-color: #1f373d;
+}
+
+.hamburger-button.is-open{
+  left: 87px;
+  background-color: #1f373d;
+}
+
+.hamburger-menu{
+  width: 50px;
+  
+  height: auto;
+}
+
+.hamburger-icon,
+.hamburger-icon::before,
+.hamburger-icon::after{
+  display: block;
+  width: 30px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: white;
+}
+
+.hamburger-icon{
+  position: relative;
+}
+
+.hamburger-icon::before,
+.hamburger-icon::after{
+  position: absolute;
+  left: 0;
+  content: "";
+}
+
+.hamburger-icon::before{
+  top: -9px;
+}
+
+.hamburger-icon::after{
+  top: 9px;
+}
+
+.light-mode .hamburger-icon,
+.light-mode .hamburger-icon::before,
+.light-mode .hamburger-icon::after{
+  background-color: #1f373d;
+}
+
+.hamburger-button.is-open .hamburger-icon,
+.hamburger-button.is-open .hamburger-icon::before,
+.hamburger-button.is-open .hamburger-icon::after{
+  background-color: #fff;
+}

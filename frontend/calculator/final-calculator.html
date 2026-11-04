@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculator</title>
+    <link rel="stylesheet" href="calculator-styles.css">
+  </head> 
+  <body>
+    <div class="welcome-text">Welcome to Ansem's lovely Calculator</div>
+    <div class="container">
+      <div class="pink-ansem">lovely ansem&#128151</div>
+      <input class="result-paragraph" type="text" onkeydown="displayResultFromKeyboardInput(event)">
+      <div>
+        <button class="gray-button" onclick="concatenate('1');">1</button>
+        <button class="gray-button" onclick="concatenate('2');">2</button>
+        <button class="gray-button" onclick="concatenate('3');">3</button>
+        <button class="yellow-button" onclick="concatenate(' + ');">+</button>
+      </div>
+      <div>
+        <button class="gray-button" onclick="concatenate('4');">4</button>
+        <button class="gray-button" onclick="concatenate('5');">5</button>
+        <button class="gray-button" onclick="concatenate('6');">6</button>
+        <button class="yellow-button" onclick="concatenate(' - ');">-</button>
+      </div>
+      <div>
+        <button class="gray-button" onclick="concatenate('7');">7</button>
+        <button class="gray-button" onclick="concatenate('8');">8</button>
+        <button class="gray-button" onclick="concatenate('9');">9</button>
+        <button class="yellow-button" onclick="concatenate('*');">*</button>
+      </div>
+      <div>
+        <button class="gray-button" onclick="concatenate('0');">0</button>
+        <button class="gray-button" onclick="concatenate('.');">.</button>
+        <button class="gray-button" onclick="evaluateCalculation()">=</button>
+        <button class="yellow-button" onclick="concatenate(' / ')">/</button>
+        <div>
+          <button class="clear-button" onclick = "clearResult()">
+            Clear
+          </button>
+        </div>
+        
+      </div>
+    </div>
+    <script src="calculator-script.js"></script>
+  </body>
+</html>

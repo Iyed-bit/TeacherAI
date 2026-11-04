@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../../styles/sidebar.css">
+  <title>Lesson Summarizer</title>
+  <link rel="stylesheet" href="../../styles/darkmode-toggle.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+
+</head>
+<body>
+  
+  <i class="bi bi-brightness-high-fill" id="toggleDark"></i>
+  <div class="side-bar" id="app-sidebar">
+    <div class="lesson-container" id="ai-container">
+      <a href="../../main-page.html">
+        <button>
+          <img src="../../images/ai.png" class="ai-icon">
+        </button>
+      </a>
+      <div class="lesson-text">Chat Bot</div>
+    </div>
+    <div class="last-three">
+      <div class="timer-container">
+        <a href="../../timeTracker/home.html">
+          <button>
+            <img src="../../images/Frame 1clock.png" class="timer-iconn">
+          </button>
+        </a>
+        <div class="timer-text">Time Tracker</div>
+      </div>
+      <div class="lesson-container">
+        <a href="../../pdfExctraction/public/index.html">
+          <button>
+            <img src="../../images/Frame 2lesson.png" class="lesson-iconn">
+          </button>
+        </a>
+        <div class="lesson-text">Lesson Summarizer</div>
+        </div>
+        <div class="lesson-container">
+          <a href="">
+            <button>
+              <img src="../../images/quizz.png" class="quizz-icon">
+            </button>
+          </a>
+          <div class="lesson-text">Quizz Generator</div>
+        </div>
+      </div>
+    </div>
+  <button class="hamburger-button" type="button" aria-label="Toggle navigation" aria-controls="app-sidebar" aria-expanded="false">
+    <span class="hamburger-icon" aria-hidden="true"></span>
+  </button>
+  <img class="logo" id="brand-logo" src="../../images/whiteTeacherAiTransparent.png" data-theme-light="../../images/teacherAiBlueUnderline.png" data-theme-dark="../../images/whiteTeacherAiTransparent.png" alt="TeacherAI">
+  <div class="lesson-title">
+    <div class="title">Lesson Summarizer</div>
+    <img src="../../images/Frame 2lesson.png" class="lesson-icon">
+  </div>
+  <div class="input-container">
+    <input type="file" id="inpFile" class="pdf-input">
+    <button type="button" id="btnUpload">Upload</button>
+  </div>
+  <br>
+  <br>
+  <div class="lesson-container-pdf">
+    <textarea id="resultText" placeholder="Your Pdf or Text"></textarea>
+    <button class="summarize-btn" id="summarizeButton" type="button">Summarize Lesson</button>
+  </div>
+  <div>
+    <div class="summary" id="summaryOutput" aria-live="polite"></div>
+  </div>
+  
+  <script src="../../side-bar.js"></script>
+  <script>
+    
+    const inpFile = document.getElementById("inpFile");
+    const btnUpload = document.getElementById("btnUpload");
+    const resultText = document.getElementById("resultText");
+    
+
+    const summarizeButton = document.getElementById("summarizeButton");
+    const summaryOutput = document.getElementById("summaryOutput");
+
+    async function extractPdf(file) {
+      const formData = new FormData();
+      formData.append("pdfFile", file);
+
+      const response = await fetch("http://localhost:3000/api/pdf/extract", {
+        method: "POST",
+        body: formData
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result.error || "PDF extraction failed.");
+      }
+      if (typeof result.text !== "string" || !result.text.trim()) {
+        throw new Error("No readable text was found in the PDF.");
+      }
+      return result.text.trim();
+    }
+
+    btnUpload.addEventListener("click", async () => {
+      const file = inpFile.files?.[0];
+      if (!file) {
+        summaryOutput.textContent = "Choose a PDF file first.";
+        return;
+      }
+
+      btnUpload.disabled = true;
+      summaryOutput.textContent = "Extracting text...";
+      try {
+        resultText.value = await extractPdf(file);
+        summaryOutput.textContent = "Text extracted. Click Summarize Lesson to create a summary.";
+      } catch (error) {
+        console.error("PDF extraction failed:", error);
+        summaryOutput.textContent = error.message;
+      } finally {
+        btnUpload.disabled = false;
+      }
+    });
+
+    summarizeButton.addEventListener("click", async () => {
+      summarizeButton.disabled = true;
+      summaryOutput.textContent = "Preparing lesson...";
+      try {
+        const file = inpFile.files?.[0];
+        const lesson = file ? await extractPdf(file) : resultText.value.trim();
+        if (!lesson) {
+        summaryOutput.textContent = "Choose a PDF or paste lesson text before summarizing.";
+        return;
+      }
+
+        if (file) {
+          resultText.value = lesson;
+        }
+
+        summaryOutput.textContent = "Summarizing lesson...";
+        const response = await fetch("http://localhost:3000/api/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            content: `Summarize this lesson for a student. Start with a short main idea, then give the key concepts as clear numbered points. Keep the summary accurate, concise, and based only on the lesson text.\n\nLesson:\n${lesson}`
+          })
+        });
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.error || `Summarization failed (HTTP ${response.status}).`);
+        }
+        summaryOutput.textContent = result.output || "The AI returned an empty summary.";
+      } catch (error) {
+        console.error("Lesson summarization failed:", error);
+        summaryOutput.textContent = error instanceof TypeError
+          ? "Could not reach the TeacherAI server. Make sure the backend is running at http://localhost:3000."
+          : error.message;
+      } finally {
+        summarizeButton.disabled = false;
+      }
+    });
+ </script>
+ <script src="../../theme.js"></script>
+
+</body>
+</html>

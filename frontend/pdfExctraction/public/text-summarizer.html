@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lesson Summarizer</title>
+    <link rel="stylesheet" href="../../styles/text-summarizer.css">
+  </head>
+  <body>
+    <h1>Summarize your lesson here either by entering a pdf file or just by pasting it in the input area.</h1>
+    <input type="file" id="inpFile">
+    <textarea type="text" style="width:300px; height: 150px;" id="resultText" class="sum-input" placeholder="Your Pdf"></textarea>
+
+    <button type="button" class="send-button" id="btnUpload">Summarize Lesson</button>
+    <div class="sum-output"></div>
+    <script>
+      const inpFile = document.getElementById("inpFile");
+      const btnUpload = document.getElementById("btnUpload");
+      const resultText = document.getElementById("resultText");
+
+      async function sendRequest() {
+          let lesson = resultText.value.trim();
+          const file = inpFile.files?.[0];
+          if (file) {
+            const formData = new FormData();
+            formData.append("pdfFile", file);
+            const extractResponse = await fetch("http://localhost:3000/api/pdf/extract", {
+              method: "POST",
+              body: formData
+            });
+            const extracted = await extractResponse.json();
+            if (!extractResponse.ok) {
+              throw new Error(extracted.error || "PDF extraction failed.");
+            }
+            lesson = extracted.text.trim();
+            resultText.value = lesson;
+          }
+
+          if (!lesson) {
+            document.querySelector(".sum-output").innerText = "Choose a PDF or enter lesson text first.";
+            return;
+          }
+
+          const content = `Summarize the lesson provided below. Begin with the main idea of the lesson, followed by its key points listed in a numbered format:
+
+Main Idea of the lesson:
+Type the main idea of the lesson here
+
+Lesson Overview and keypoints:
+
+This lesson covers [topic]. Your task is to summarize the lesson by highlighting the main points in the following structured format:
+
+1.[Main Point 1]
+2.[Main Point 2]
+3.[Main Point 3]
+.
+.
+.
+n.[Main Point n]
+Ensure your summary is concise yet comprehensive, capturing the core concepts and insights presented in the lesson.
+
+${lesson}`;
+          document.querySelector(".sum-output").innerText = "Summarizing...";
+          const response = await fetch("http://localhost:3000/api/chat", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ content })
+          });
+          const result = await response.json();
+          if (!response.ok) {
+            throw new Error(result.error || "Summarization failed.");
+          }
+          document.querySelector(".sum-output").innerText = result.output;
+      }
+
+      btnUpload.addEventListener("click", () => {
+        sendRequest().catch(error => {
+          console.error("Lesson summarization failed:", error);
+          document.querySelector(".sum-output").innerText = error.message;
+        });
+      });
+    </script>
+  </body>
+</html>

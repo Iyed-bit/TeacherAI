@@ -1,0 +1,74 @@
+.container{
+  position: absolute;
+  top: 100px;
+  right:  80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 25px;
+  background-color: #1f373d;
+  padding: 20px 5px 10px 15px;
+  border-radius: 20px; 
+}
+.gray-button, .yellow-button, .clear-button {
+  background-color: #4f6465;
+  width: 52px;
+  height: 52px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  font-size: 25px;
+  cursor: pointer;
+  transition: opacity .3s;
+  justify-content: space-between;
+}
+.gray-button:active, .yellow-button:active, .clear-button:active{
+  opacity: .3;
+}
+.yellow-button{
+  background-color: #8D8C65;
+}
+.clear-button{
+  font-size: 14px;
+}
+.result-paragraph{
+  display: flex;
+  align-items: center;
+  height: 45px;
+  padding-left: 10px;
+  border-radius: 2px;
+  border: none;
+  width: 228px;
+  font-size: 40px;
+  background-color: black;
+  color: white;
+  margin-bottom: 20px;
+}
+.result-paragraph:focus{
+  outline: none;
+}
+.calculator-label{
+  position: absolute;
+  color: rgb(147, 4, 101);
+  right: 50% ;
+  transform: translateX(50%);
+  text-wrap: nowrap;
+  top: 10px;
+  font-size: 20px
+}
+.little-text{
+  font-size: 20px;
+  margin-top: 21px;
+  margin-bottom: 20px;
+}
+.welcome-text{
+  color: rgb(245, 94, 119);
+  position: absolute;
+  font-size: 30px;
+  text-align: center;
+  top: 20px;
+  font-weight: 700;
+  font-style: italic;
+}

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TeacherAi</title>
+  <link rel="stylesheet" href="styles/landing-page-styles.css">
+  <link rel="stylesheet" href="styles/main-page-styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="calculator/calculator-styles.css">
+  <link rel="stylesheet" href="styles/darkmode-toggle.css">
+  <link rel="stylesheet" href="styles/sidebar.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+
+
+</head>
+<body>
+  <i class="bi bi-brightness-high-fill" style="right: 40px; top: 50px" id="toggleDark"></i>
+  <div class="side-bar" id="app-sidebar">
+    <div class="lesson-container" id="ai-container">
+      <a href="pdfExctraction/public/index.html">
+        <button>
+          <img src="images/ai.png" class="ai-icon">
+        </button>
+      </a>
+      <div class="lesson-text">Chat Bot</div>
+    </div>
+    <div class="last-three">
+      <div class="timer-container">
+        <a href="timeTracker/home.html">
+          <button>
+            <img src="images/Frame 1clock.png" class="timer-iconn">
+          </button>
+        </a>
+        <div class="timer-text">Time Tracker</div>
+      </div>
+      <div class="lesson-container">
+        <a href="pdfExctraction/public/index.html">
+          <button>
+            <img src="images/Frame 2lesson.png" class="lesson-iconn">
+          </button>
+        </a>
+        <div class="lesson-text">Lesson Summarizer</div>
+        </div>
+        <div class="lesson-container">
+          <a href="pdfExctraction/public/index.html">
+            <button>
+              <img src="images/quizz.png" class="quizz-icon">
+            </button>
+          </a>
+          <div class="lesson-text">Quizz Generator</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button class="hamburger-button" type="button" aria-label="Toggle navigation" aria-controls="app-sidebar" aria-expanded="false">
+    <span class="hamburger-icon" aria-hidden="true"></span>
+  </button>
+  <div class="main-container">
+    
+    <div class="main-title" id="main-title-js"><a href="index.html"><img class="teacherImage" data-theme-light="images/teacherAiBlueUnderline.png" data-theme-dark="images/blacTeacherAiF.png" src="images/blacTeacherAiF.png" alt="TeacherAI"></a></div>
+    <div class="subtitle">How can I help you?</div>
+    <div class="buttons-container">
+      <div class="first-button-row">
+        <button class="first-button" data-prompt="Solve the quadratic equation 2x² + 5x + 3 = 0. Show the steps and verify the roots.">Solve Second Degree Equation <br>2x² + 5x + 3 = 0</button>
+        <button data-prompt="Give me creative design ideas for a student project. Ask one clarifying question only if needed.">Give me design ideas</button>
+      </div>
+      <div class="second-button-row">
+        <button data-prompt="Suggest a good book to read. Briefly explain why you recommend it.">Suggest me a good book to read</button>
+        <button data-prompt="Give practical, encouraging tips for achieving success in school and life.">Any tips on how to become successful?</button>
+      </div>
+    </div>
+    <div class="main-output"></div>
+    <div class="input-container">
+      <input type="text" placeholder="Message TeacherAi" class="main-input" aria-label="Message TeacherAI">
+      <button class="calculator-button"><img class="calculator-icon" src="images/calculator.png"></button>
+      <button onclick="sendRequest('.main-input')" type="button" class="send-button">Send</button>
+      <div class="container"  id="cal" style="position: absolute; top: 700px ;background-color  : #435152">
+        <div>
+          <button class="gray-button" onclick="concatenate('√');">&#x221A;</button>
+          <button class="gray-button" onclick="concatenate();">|<var>f</var> |</button>
+          <button class="gray-button" onclick="concatenate();"><var>x</var> &#x207F;</button>
+          <button class="yellow-button" onclick="concatenate();">e</button>
+        </div>
+        <div>
+          <button class="gray-button" onclick="concatenate();">lim</button>
+          <button class="gray-button" onclick="concatenate();">ln</button>
+          <button class="gray-button" onclick="concatenate();">cos</button>
+          <button class="yellow-button" onclick="concatenate();">sin</button>
+        </div>
+        <div>
+          <button class="gray-button" onclick="concatenate();">tan</button>
+          <button class="gray-button" onclick="concatenate();">log</button>
+          <button class="gray-button" onclick="concatenate();"><var>f</var> '</button>
+          <button class="yellow-button" onclick="concatenate();">x</button>
+        </div>
+        <div>
+          <button class="gray-button" onclick="concatenate();">&#8747;</button>
+          <button class="gray-button" onclick="concatenate();">+∞</button>
+          <button class="gray-button" onclick="evaluateCalculation()">-∞</button>
+          <button class="yellow-button" onclick="concatenate()">/</button>
+          <div>
+            <button class="clear-button" onclick = "clearResult()">
+              Clear
+            </button>
+          </div>
+        </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="script.js"></script>
+  <script src="side-bar.js"></script>
+  
+  <script>
+    // async function sendRequest(input, output) {
+    // let content = '';      
+    // if (input =='.main-input' || input == '.pdf-input'){
+    //       content = document.querySelector(input).value;
+          
+    //     }
+
+    // else{
+    //   content = document.querySelector(input).innerText;
+    // }
+
+    // console.log(content)
+    // try {
+    //     document.querySelector(output).innerText = "Loading.../"
+    //     const response = await fetch('http://localhost:3000/api/chat', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify({ content }),
+    //     });
+
+    //     if (!response.ok) {
+    //         throw new Error(`HTTP error! Status: ${response.status}`);
+    //     }
+
+            
+    //         const result = await response.json();
+            
+    //         console.log(result);
+
+    //         document.querySelector(output).innerText = result?.output;
+    //     } catch (error) {
+    //         console.error('Error:', error);
+    //         document.querySelector(output).innerText = 'Error occurred.';
+    //     }
+    //     document.querySelector(".main-input").value = "";
+    // }
+    async function sendRequest(selector = '.main-input', prompt = null) {
+      const input = selector ? document.querySelector(selector) : null;
+      const output = document.querySelector('.main-output');
+      const content = prompt || (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement
+        ? input.value.trim()
+        : input?.dataset.prompt || input?.innerText.trim());
+
+      if (!content) {
+        output.innerText = 'Enter a question first.';
+        return;
+      }
+
+      output.innerText = 'Loading...';
+      try {
+        const response = await fetch('http://localhost:3000/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ content }),
+        });
+        const result = await response.json();
+
+        if (!response.ok) {
+          throw new Error(result.error || `Request failed (HTTP ${response.status}).`);
+        }
+
+        output.innerText = result.output || 'The AI returned an empty response.';
+        if (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement) {
+          input.value = '';
+        }
+      } catch (error) {
+        console.error('TeacherAI request failed:', error);
+        output.innerText = error instanceof TypeError
+          ? 'Could not reach the TeacherAI server. Make sure the backend is running at http://localhost:3000.'
+          : error.message;
+      }
+    }
+
+    document.querySelectorAll('[data-prompt]').forEach((button) => {
+      button.addEventListener('click', () => sendRequest(null, button.dataset.prompt));
+    });
+
+    document.querySelector('.main-input').addEventListener('keydown', (event) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        sendRequest('.main-input');
+      }
+    });
+    </script>
+  <script src="calculator/calculator-script.js"></script>
+  <script src="theme.js"></script>
+</body>
+</html>

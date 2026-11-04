@@ -1,0 +1,219 @@
+body{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  font-family: Roboto;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background-color: #435152;
+  color: white;
+  margin: 0;
+  overflow-x: hidden;
+  transition: background-color .3s ease, color .3s ease;
+}
+#toggleDark{
+  top: 18px;
+  right: 18px;
+  transform: none;
+}
+
+.logo{
+  position: absolute;
+  right: 84px;
+  top: 15px;
+  width: 180px;
+  height: 55px;
+  object-fit: contain;
+}
+
+.title{
+  font-size: 35px;
+  font-weight: 500;
+  margin-right: 20px; 
+}
+
+#inpFile, input::file-selector-button{
+  height: 30px;
+  border-radius: 40px;
+  border-style: none;
+}
+
+.input-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+#inpFile{
+  font-size: medium;
+  color: white;
+  background-color: #1f373d;
+  padding: 10px 20px;
+  margin-right: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 600px;
+}
+input::file-selector-button{
+  color: white;
+  background-color: rgb(79, 100, 101);
+  margin-right: 25px;
+  cursor: pointer;
+}
+#btnUpload{
+  background-color: #1f373d;
+  font-size: 17px;
+  color: white;
+  border-style: none;
+  border-radius: 20px;
+  padding: 10px 20px;
+  cursor: pointer;
+
+}
+
+
+::-webkit-scrollbar {
+  width: 10px;  
+}
+
+::-webkit-scrollbar-track {
+  background-color: #8D8C65; 
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #1f373d; 
+  border-radius: 5px; 
+}
+.lesson-container-pdf{
+  position: relative;
+  display: flex;
+  align-items: center;
+  
+}
+
+.lesson-title{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 48px;
+  margin-bottom: 30px;
+}
+.lesson-icon{
+  height: 53px;
+  width: auto;
+}
+
+button{
+  border: none;
+}
+#resultText, .summary{
+  width: min(700px, calc(100vw - 32px));
+  height: 350px;
+  padding: 20px;
+}
+#resultText{
+  box-sizing: border-box;
+  border-radius: 20px;
+  background-color: #1f373d;
+  border: none;
+  max-width: 805px;
+  max-height: 500px;
+  min-width: 250px;
+  min-height:250px;
+}
+#resultText::placeholder{
+  font-family: Roboto;
+  font-size: 15px;
+  color: white;
+  font-style: italic;
+}
+
+#resultText:focus{
+  outline: 2px solid #8d8c65;
+}
+.summarize-btn{
+  padding: 20px 25px;
+  font-family: inherit;
+  font-size: inherit;
+  background-color: #1f373d;
+  color: white;
+  border-style: none;
+  border-radius: 20px;
+  cursor: pointer;
+  position: absolute;
+  right: -210px;
+}
+
+textarea{
+  color: white;
+  font-family: Roboto;
+  font-size: 20px;
+
+}
+
+.summary{
+  background-color: #1f373d;
+  color:white;
+  width:700px;
+  height: 350px;
+  margin-top: 60px;
+  border-radius: 20px;
+  white-space: pre-wrap;
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.summary:empty{
+  display: none;
+}
+
+.input-container button:disabled,
+.summarize-btn:disabled{
+  cursor: wait;
+  opacity: .7;
+}
+
+body.light-mode{
+  background-color: #d6d0d0;
+  color: #1f373d;
+}
+
+.light-mode #toggleDark{
+  color: #1f373d;
+}
+
+.light-mode .title{
+  color: #1f373d;
+}
+
+.light-mode #inpFile{
+  color: #1f373d;
+  background-color: #fff;
+}
+
+.light-mode #inpFile::file-selector-button{
+  color: white;
+  background-color: #435152;
+}
+
+.light-mode #resultText,
+.light-mode .summary{
+  background-color: #fff;
+  color: #1f373d;
+}
+
+.light-mode #resultText::placeholder{
+  color: #526365;
+}
+
+.light-mode .lesson-icon{
+  filter: brightness(0) saturate(100%) invert(19%) sepia(13%) saturate(1328%) hue-rotate(143deg) brightness(91%) contrast(91%);
+}
+
+.hamburger-button.is-open .hamburger-icon,
+.hamburger-button.is-open .hamburger-icon::before,
+.hamburger-button.is-open .hamburger-icon::after{
+  background-color: #fff;
+}
