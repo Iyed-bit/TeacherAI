@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#435152">
+  <title>Quiz Studio | TeacherAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Changa+One&family=Roboto:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/sidebar.css">
+  <link rel="stylesheet" href="../styles/darkmode-toggle.css">
+  <link rel="stylesheet" href="quiz.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+</head>
+<body>
+  <i class="bi bi-brightness-high-fill" id="toggleDark" aria-label="Switch to light mode"></i>
+  <aside class="side-bar" id="app-sidebar" aria-label="Main navigation">
+    <div class="lesson-container" id="ai-container">
+      <a href="../main-page.html" aria-label="Chat Bot">
+        <button type="button" aria-label="Chat Bot"><img src="../images/ai.png" class="ai-icon" alt=""></button>
+      </a>
+      <div class="lesson-text">Chat Bot</div>
+    </div>
+    <div class="last-three">
+      <div class="timer-container">
+        <a href="../timeTracker/home.html" aria-label="Time Tracker">
+          <button type="button" aria-label="Time Tracker"><img src="../images/Frame 1clock.png" class="timer-iconn" alt=""></button>
+        </a>
+        <div class="timer-text">Time Tracker</div>
+      </div>
+      <div class="lesson-container">
+        <a href="../pdfExctraction/public/index.html" aria-label="Lesson Summarizer">
+          <button type="button" aria-label="Lesson Summarizer"><img src="../images/Frame 2lesson.png" class="lesson-iconn" alt=""></button>
+        </a>
+        <div class="lesson-text">Lesson Summarizer</div>
+      </div>
+      <div class="lesson-container">
+        <a href="./" aria-current="page" aria-label="Quiz Generator">
+          <button type="button" aria-label="Quiz Generator"><img src="../images/quizz.png" class="quizz-icon" alt=""></button>
+        </a>
+        <div class="lesson-text">Quiz Generator</div>
+      </div>
+    </div>
+  </aside>
+  <button class="hamburger-button" type="button" aria-label="Toggle navigation" aria-controls="app-sidebar" aria-expanded="false">
+    <span class="hamburger-icon" aria-hidden="true"></span>
+  </button>
+
+  <main class="quiz-app">
+    <header class="page-header">
+      <a class="brand" href="../index.html" aria-label="TeacherAI home">
+        <img src="../images/whiteTeacherAiTransparent.png" data-theme-light="../images/teacherAiBlueUnderline.png" data-theme-dark="../images/whiteTeacherAiTransparent.png" alt="TeacherAI">
+      </a>
+      <div class="eyebrow"><span class="sparkle" aria-hidden="true">✦</span> YOUR PERSONAL STUDY SIDEKICK</div>
+      <h1>Quiz <span>Studio</span></h1>
+      <p class="page-intro">Turn any topic into a little “I’ve got this” moment.</p>
+    </header>
+
+    <section class="quiz-card" aria-labelledby="setup-title">
+      <div id="setup-screen">
+        <div class="card-heading">
+          <div class="heading-icon" aria-hidden="true">✎</div>
+          <div>
+            <p class="step-label">FIRST, THE FUN PART</p>
+            <h2 id="setup-title">What are we learning today?</h2>
+          </div>
+        </div>
+        <form id="quiz-form">
+          <label class="field-label" for="quiz-topic">Your topic</label>
+          <textarea id="quiz-topic" name="topic" maxlength="300" rows="2" placeholder="Try “the water cycle”, “ancient Egypt” or “fractions”" required></textarea>
+          <div class="field-row">
+            <fieldset class="choice-field">
+              <legend class="field-label">Choose your level</legend>
+              <div class="difficulty-options">
+                <label class="difficulty-option">
+                  <input type="radio" name="difficulty" value="easy">
+                  <span><span class="level-emoji" aria-hidden="true">🌱</span> Easy</span>
+                </label>
+                <label class="difficulty-option">
+                  <input type="radio" name="difficulty" value="medium" checked>
+                  <span><span class="level-emoji" aria-hidden="true">🚀</span> Medium</span>
+                </label>
+                <label class="difficulty-option">
+                  <input type="radio" name="difficulty" value="hard">
+                  <span><span class="level-emoji" aria-hidden="true">🔥</span> Hard</span>
+                </label>
+              </div>
+            </fieldset>
+            <div class="count-field">
+              <label class="field-label" for="question-count">Quiz length</label>
+              <select id="question-count" name="questionCount">
+                <option value="5" selected>5 questions</option>
+                <option value="8">8 questions</option>
+                <option value="10">10 questions</option>
+              </select>
+            </div>
+          </div>
+          <div id="setup-error" class="error-message" role="alert" hidden></div>
+          <button class="primary-button" id="generate-button" type="submit">
+            <span class="button-label">Make my quiz</span><span aria-hidden="true"> ✨</span>
+          </button>
+          <p class="helper-text">Made just for you with TeacherAI · no grades, just growth</p>
+        </form>
+      </div>
+
+      <div id="loading-screen" class="loading-screen" aria-live="polite" hidden>
+        <div class="loader" aria-hidden="true"><span></span><span></span><span></span></div>
+        <h2>Putting your quiz together…</h2>
+        <p>TeacherAI is finding the just-right questions.</p>
+      </div>
+
+      <div id="question-screen" hidden>
+        <div class="quiz-topline">
+          <span class="topic-chip" id="active-topic"></span>
+          <span class="question-count" id="question-count-label"></span>
+        </div>
+        <div class="progress-track" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <span id="progress-bar"></span>
+        </div>
+        <p class="question-number" id="question-number"></p>
+        <h2 class="question-text" id="question-text" tabindex="-1"></h2>
+        <div class="answer-options" id="answer-options"></div>
+        <div class="answer-feedback" id="answer-feedback" aria-live="polite" tabindex="-1" hidden></div>
+        <button class="primary-button" id="check-answer" type="button" disabled>Check my answer</button>
+        <button class="primary-button" id="next-question" type="button" hidden>Next question <span aria-hidden="true">→</span></button>
+      </div>
+
+      <div id="results-screen" class="results-screen" aria-live="polite" hidden>
+        <div class="result-sticker" id="result-sticker" aria-hidden="true">🎉</div>
+        <p class="step-label">QUIZ COMPLETE</p>
+        <h2 id="result-title" tabindex="-1">Look at you go!</h2>
+        <p class="result-score" id="result-score"></p>
+        <p class="result-message" id="result-message"></p>
+        <div class="result-actions">
+          <button class="primary-button" id="retry-quiz" type="button">Try this quiz again</button>
+          <button class="secondary-button" id="new-quiz" type="button">Make another quiz</button>
+        </div>
+      </div>
+    </section>
+    <p class="footer-note">Curiosity looks good on you. Keep going! <span aria-hidden="true">✦</span></p>
+  </main>
+
+  <script src="../scripts/api-client.js"></script>
+  <script src="../scripts/sidebar.js"></script>
+  <script src="../scripts/theme.js"></script>
+  <script src="quiz.js"></script>
+</body>
+</html>
