@@ -1,17 +1,18 @@
 # TeacherAI
 
-TeacherAI is organized as a static frontend and a separate Express API:
+TeacherAI is organized into a static frontend, an Express API, and a standalone
+archived login app:
 
-- `frontend/` contains the existing HTML, CSS, JavaScript, and assets.
-- `backend/` contains the API server.
-- `archive/` contains the previous app/server copies for reference; they are not used by the new setup.
+- `frontend/` contains the HTML entry pages, shared scripts, styles, and assets.
+- `backend/` contains the API app, routes, controllers, middleware, and services.
+- `archive/loginTeacherAi/` contains the older standalone Express login app.
 
 ## Run locally
 
 1. In `backend/`, run `npm install`.
 2. Copy `backend/.env.example` to `backend/.env` and add your OpenAI API key if you want to use chat.
-3. Start the API with `npm start` from `backend/`.
-4. In a second terminal, start the frontend with `node dev-server.cjs` from `frontend/`.
+3. Start the API with `npm run dev` from `backend/` (or `npm start`).
+4. In a second terminal, start the frontend with `npm run dev` from `frontend/` (or `npm start`).
 5. Open `http://127.0.0.1:5500` in your browser and choose **Get Started**.
 
 The API listens on `http://localhost:3000` by default. Its health check is
@@ -25,3 +26,8 @@ origin. Chat supports local Ollama (`AI_PROVIDER=ollama`) or OpenAI
 (`AI_PROVIDER=openai` with `OPENAI_API_KEY`). Ollama uses the installed
 `llama3.2:latest` model by default and does not require OpenAI API credits.
 The old login app is archived and is not connected to this API yet.
+
+The archived login app can be run separately from `archive/loginTeacherAi/` with
+`npm install` followed by `npm start`. It requires MongoDB and uses port 3000 by
+default, so do not run it at the same time as the active API unless you configure
+a different `PORT`.
