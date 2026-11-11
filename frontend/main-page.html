@@ -76,7 +76,7 @@
     <div class="input-container">
       <input type="text" placeholder="Message TeacherAi" class="main-input" aria-label="Message TeacherAI">
       <button class="calculator-button"><img class="calculator-icon" src="images/calculator.png"></button>
-      <button onclick="sendRequest('.main-input')" type="button" class="send-button">Send</button>
+      <button type="button" class="send-button">Send</button>
       <div class="container"  id="cal" style="position: absolute; top: 700px ;background-color  : #435152">
         <div>
           <button class="gray-button" onclick="concatenate('√');">&#x221A;</button>
@@ -109,98 +109,11 @@
         </div>
     </div>
   </div>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="script.js"></script>
-  <script src="side-bar.js"></script>
-  
-  <script>
-    // async function sendRequest(input, output) {
-    // let content = '';      
-    // if (input =='.main-input' || input == '.pdf-input'){
-    //       content = document.querySelector(input).value;
-          
-    //     }
-
-    // else{
-    //   content = document.querySelector(input).innerText;
-    // }
-
-    // console.log(content)
-    // try {
-    //     document.querySelector(output).innerText = "Loading.../"
-    //     const response = await fetch('http://localhost:3000/api/chat', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify({ content }),
-    //     });
-
-    //     if (!response.ok) {
-    //         throw new Error(`HTTP error! Status: ${response.status}`);
-    //     }
-
-            
-    //         const result = await response.json();
-            
-    //         console.log(result);
-
-    //         document.querySelector(output).innerText = result?.output;
-    //     } catch (error) {
-    //         console.error('Error:', error);
-    //         document.querySelector(output).innerText = 'Error occurred.';
-    //     }
-    //     document.querySelector(".main-input").value = "";
-    // }
-    async function sendRequest(selector = '.main-input', prompt = null) {
-      const input = selector ? document.querySelector(selector) : null;
-      const output = document.querySelector('.main-output');
-      const content = prompt || (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement
-        ? input.value.trim()
-        : input?.dataset.prompt || input?.innerText.trim());
-
-      if (!content) {
-        output.innerText = 'Enter a question first.';
-        return;
-      }
-
-      output.innerText = 'Loading...';
-      try {
-        const response = await fetch('http://localhost:3000/api/chat', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ content }),
-        });
-        const result = await response.json();
-
-        if (!response.ok) {
-          throw new Error(result.error || `Request failed (HTTP ${response.status}).`);
-        }
-
-        output.innerText = result.output || 'The AI returned an empty response.';
-        if (input instanceof HTMLInputElement || input instanceof HTMLTextAreaElement) {
-          input.value = '';
-        }
-      } catch (error) {
-        console.error('TeacherAI request failed:', error);
-        output.innerText = error instanceof TypeError
-          ? 'Could not reach the TeacherAI server. Make sure the backend is running at http://localhost:3000.'
-          : error.message;
-      }
-    }
-
-    document.querySelectorAll('[data-prompt]').forEach((button) => {
-      button.addEventListener('click', () => sendRequest(null, button.dataset.prompt));
-    });
-
-    document.querySelector('.main-input').addEventListener('keydown', (event) => {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        sendRequest('.main-input');
-      }
-    });
-    </script>
+  <script src="scripts/api-client.js"></script>
+  <script src="scripts/chat.js"></script>
+  <script src="scripts/sidebar.js"></script>
+  <script src="scripts/calculator-toggle.js"></script>
   <script src="calculator/calculator-script.js"></script>
-  <script src="theme.js"></script>
+  <script src="scripts/theme.js"></script>
 </body>
 </html>
