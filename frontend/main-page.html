@@ -79,30 +79,30 @@
       <button type="button" class="send-button">Send</button>
       <div class="container"  id="cal" style="position: absolute; top: 700px ;background-color  : #435152">
         <div>
-          <button class="gray-button" onclick="concatenate('√');">&#x221A;</button>
-          <button class="gray-button" onclick="concatenate();">|<var>f</var> |</button>
-          <button class="gray-button" onclick="concatenate();"><var>x</var> &#x207F;</button>
-          <button class="yellow-button" onclick="concatenate();">e</button>
+          <button class="gray-button" type="button" data-calculator-insert="√">√</button>
+          <button class="gray-button" type="button" data-calculator-insert="|">|f|</button>
+          <button class="gray-button" type="button" data-calculator-insert="^">xⁿ</button>
+          <button class="yellow-button" type="button" data-calculator-insert="e">e</button>
         </div>
         <div>
-          <button class="gray-button" onclick="concatenate();">lim</button>
-          <button class="gray-button" onclick="concatenate();">ln</button>
-          <button class="gray-button" onclick="concatenate();">cos</button>
-          <button class="yellow-button" onclick="concatenate();">sin</button>
+          <button class="gray-button" type="button" data-calculator-insert="lim(">lim</button>
+          <button class="gray-button" type="button" data-calculator-insert="ln(">ln</button>
+          <button class="gray-button" type="button" data-calculator-insert="cos(">cos</button>
+          <button class="yellow-button" type="button" data-calculator-insert="sin(">sin</button>
         </div>
         <div>
-          <button class="gray-button" onclick="concatenate();">tan</button>
-          <button class="gray-button" onclick="concatenate();">log</button>
-          <button class="gray-button" onclick="concatenate();"><var>f</var> '</button>
-          <button class="yellow-button" onclick="concatenate();">x</button>
+          <button class="gray-button" type="button" data-calculator-insert="tan(">tan</button>
+          <button class="gray-button" type="button" data-calculator-insert="log(">log</button>
+          <button class="gray-button" type="button" data-calculator-insert="′">f′</button>
+          <button class="yellow-button" type="button" data-calculator-insert="x">x</button>
         </div>
         <div>
-          <button class="gray-button" onclick="concatenate();">&#8747;</button>
-          <button class="gray-button" onclick="concatenate();">+∞</button>
-          <button class="gray-button" onclick="evaluateCalculation()">-∞</button>
-          <button class="yellow-button" onclick="concatenate()">/</button>
+          <button class="gray-button" type="button" data-calculator-insert="∫">∫</button>
+          <button class="gray-button" type="button" data-calculator-insert="+∞">+∞</button>
+          <button class="gray-button" type="button" data-calculator-insert="-∞">-∞</button>
+          <button class="yellow-button" type="button" data-calculator-insert="/">/</button>
           <div>
-            <button class="clear-button" onclick = "clearResult()">
+            <button class="clear-button" type="button" onclick="clearResult()">
               Clear
             </button>
           </div>
