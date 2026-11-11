@@ -15,6 +15,12 @@ archived login app:
 4. In a second terminal, start the frontend with `npm run dev` from `frontend/` (or `npm start`).
 5. Open `http://127.0.0.1:5500` in your browser and choose **Get Started**.
 
+## Landing pages
+
+`frontend/index.html` is the default landing page served at `/`. The alternative
+video-background design is `frontend/landing-video.html`; open it directly at
+`/landing-video.html` to preview it. Both pages link to the same main app.
+
 The API listens on `http://localhost:3000` by default. Its health check is
 `GET /api/health`; PDF extraction uses `POST /api/pdf/extract` with a
 multipart `pdfFile` field; chat uses `POST /api/chat` with a JSON `content`
