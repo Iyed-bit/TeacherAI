@@ -1,25 +1,22 @@
-const mongoose = require('mongoose')
-const connect = mongoose.connect('mongodb://127.0.0.1:27017/TeacherAiLogin')
+const mongoose = require("mongoose");
 
- 
-connect.then(() => {
-  console.log("Database connected successfully")
-})
-.catch(() => {
-  console.log("Database cannot be connected")
-})
-
-const LoginSchema = new mongoose.Schema({
-  name:{
+const loginSchema = new mongoose.Schema({
+  name: {
     type: String,
-    required: true
+    required: true,
+    trim: true,
   },
   password: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
-const collection = new mongoose.model("users", LoginSchema)
+const User = mongoose.models.User || mongoose.model("User", loginSchema);
 
-module.exports = collection
+function connectDatabase() {
+  const connectionString = process.env.MONGODB_URI || "mongodb://127.0.0.1:27017/TeacherAiLogin";
+  return mongoose.connect(connectionString);
+}
+
+module.exports = { connectDatabase, User };

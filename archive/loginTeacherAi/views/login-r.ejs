@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="login-r.css">
+    <link rel="stylesheet" href="/css/login-r.css">
     <title>Login</title>
 </head>
 <body>
@@ -21,11 +21,8 @@
                 </ul>
             </div>
             <div class="nav-button">
-                <button class="btn white-btn" id="loginbtn" onclick="login()">Sign In</button>
-                <button class="btn" id="registerbtn" onclick="register()">Sign Up</button>
-            </div>
-            <div class="nav-menu-btn">
-                <i class="bx bx-menu" onclick="myMenuFunction()"></i>
+                <button class="btn white-btn" id="loginbtn" type="button" data-auth-view="login">Sign In</button>
+                <button class="btn" id="registerbtn" type="button" data-auth-view="register">Sign Up</button>
             </div>
         </nav>
         <!---------------------------------- form box -------------------------------->
@@ -33,7 +30,7 @@
             <!--------------------------- login form --------------------->
             <div class="login-container" id="login">
                 <div class="top">
-                    <span>Don't have an account? <a href="#" onclick="register()">Sign Up</a></span>
+                    <span>Don't have an account? <a href="#" data-auth-view="register">Sign Up</a></span>
                     <header>Login</header>
                 </div>
                 <div class="input-box">
@@ -60,7 +57,7 @@
             <!--------------------------- registration form --------------------->
             <div class="register-container" id="register">
                 <div class="top">
-                    <span>have an account? <a href="#" onclick="login()">Login</a></span>
+                    <span>have an account? <a href="#" data-auth-view="login">Login</a></span>
                     <header>Sign Up</header>
                 </div>
                 <div class="two-forms">
@@ -96,28 +93,6 @@
             </div>
         </div>
     </div>
-    <script>
-        var a = document.getElementById("loginBtn");
-        var b = document.getElementById("registerBtn");
-        var x = document.getElementById("login");
-        var y = document.getElementById("register");
-
-        function login(){
-            x.style.left ="4px";
-            y.style.right = "-520px";
-            a.className += "white-btn";
-            b.className = "btn";
-            x.style.opacity = 1;
-            y.style.opacity = 0;
-        }
-        function register(){
-            x.style.left = "-520px";
-            y.style.right = "5px";
-            a.className = "btn";
-            b.className += "white-btn";
-            x.style.opacity = 0;
-            y.style.opacity= 1;
-        }
-    </script>
+    <script src="/js/login-toggle.js"></script>
 </body>
 </html>
