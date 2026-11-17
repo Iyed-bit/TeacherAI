@@ -21,10 +21,20 @@ archived login app:
 video-background design is `frontend/landing-video.html`; open it directly at
 `/landing-video.html` to preview it. Both pages link to the same main app.
 
+The time tracker at `frontend/timeTracker/home.html` saves tasks and timer state
+in the browser's local storage. Running timers continue to accrue while you visit
+other pages or close and reopen the tracker; tasks remain until deleted there.
+A compact running-task list appears on every frontend page, showing up to four
+active timers. Its **Time Tracker** title links back to the tracker.
+
 The API listens on `http://localhost:3000` by default. Its health check is
 `GET /api/health`; PDF extraction uses `POST /api/pdf/extract` with a
 multipart `pdfFile` field; chat uses `POST /api/chat` with a JSON `content`
-string.
+string. The quiz generator at `frontend/quiz/` uses `POST /api/quiz/generate`
+and Ollama to create interactive multiple-choice quizzes. Set `OLLAMA_BASE_URL`
+and `OLLAMA_MODEL` in `backend/.env` if your Ollama server or model differs from the defaults.
+Completed quizzes can be saved as flashcards and revisited at
+`frontend/flashcards/`; decks are stored in the browser's local storage.
 
 Local HTTP development origins such as `localhost:5501` are allowed by the
 backend. Set `FRONTEND_ORIGINS` in `backend/.env` for a non-local frontend
