@@ -8,7 +8,7 @@ class AiServiceError extends Error {
   }
 }
 
-async function generateOllamaResponse(content) {
+async function generateOllamaResponse(content, { format, options } = {}) {
   const baseUrl = (process.env.OLLAMA_BASE_URL || "http://127.0.0.1:11434").replace(/\/+$/, "");
   const model = process.env.OLLAMA_MODEL || "llama3.2:latest";
 
@@ -20,6 +20,8 @@ async function generateOllamaResponse(content) {
         model,
         messages: [{ role: "user", content }],
         stream: false,
+        ...(format ? { format } : {}),
+        ...(options ? { options } : {}),
       }),
       signal: AbortSignal.timeout(120000),
     });
@@ -105,4 +107,4 @@ async function generateResponse(content) {
   return generateOpenAiResponse(content);
 }
 
-module.exports = { AiServiceError, generateResponse };
+module.exports = { AiServiceError, generateOllamaResponse, generateResponse };
