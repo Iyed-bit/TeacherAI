@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="../styles/darkmode-toggle.css">
   <link rel="stylesheet" href="quiz.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="../styles/typography.css">
 </head>
 <body>
   <i class="bi bi-brightness-high-fill" id="toggleDark" aria-label="Switch to light mode"></i>
@@ -52,6 +53,7 @@
       <a class="brand" href="../index.html" aria-label="TeacherAI home">
         <img src="../images/whiteTeacherAiTransparent.png" data-theme-light="../images/teacherAiBlueUnderline.png" data-theme-dark="../images/whiteTeacherAiTransparent.png" alt="TeacherAI">
       </a>
+      <a class="flashcards-link" href="../flashcards/">My flashcards <span aria-hidden="true">▤</span></a>
       <div class="eyebrow"><span class="sparkle" aria-hidden="true">✦</span> YOUR PERSONAL STUDY SIDEKICK</div>
       <h1>Quiz <span>Studio</span></h1>
       <p class="page-intro">Turn any topic into a little “I’ve got this” moment.</p>
@@ -132,6 +134,9 @@
         <h2 id="result-title" tabindex="-1">Look at you go!</h2>
         <p class="result-score" id="result-score"></p>
         <p class="result-message" id="result-message"></p>
+        <button class="primary-button save-flashcards-button" id="save-flashcards" type="button">Save key ideas as flashcards <span aria-hidden="true">▤</span></button>
+        <p class="save-status" id="save-status" role="status" hidden></p>
+        <a class="saved-flashcards-link" id="saved-flashcards-link" href="../flashcards/" hidden>Go to my flashcards →</a>
         <div class="result-actions">
           <button class="primary-button" id="retry-quiz" type="button">Try this quiz again</button>
           <button class="secondary-button" id="new-quiz" type="button">Make another quiz</button>
@@ -142,8 +147,10 @@
   </main>
 
   <script src="../scripts/api-client.js"></script>
+  <script src="../scripts/flashcard-storage.js"></script>
   <script src="../scripts/sidebar.js"></script>
   <script src="../scripts/theme.js"></script>
   <script src="quiz.js"></script>
+  <script src="../scripts/time-tracker-widget.js"></script>
 </body>
 </html>

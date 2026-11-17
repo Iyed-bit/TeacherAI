@@ -10,6 +10,9 @@ const optionsContainer = document.getElementById("answer-options");
 const checkButton = document.getElementById("check-answer");
 const nextButton = document.getElementById("next-question");
 const answerFeedback = document.getElementById("answer-feedback");
+const saveFlashcardsButton = document.getElementById("save-flashcards");
+const saveStatus = document.getElementById("save-status");
+const savedFlashcardsLink = document.getElementById("saved-flashcards-link");
 
 let quiz = null;
 let questionIndex = 0;
@@ -53,11 +56,12 @@ function showQuestion() {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "answer-option";
+    button.setAttribute("aria-label", `${String.fromCharCode(65 + index)}. ${option}`);
     button.setAttribute("aria-pressed", "false");
 
     const marker = document.createElement("span");
     marker.className = "option-marker";
-    marker.textContent = String.fromCharCode(65 + index);
+    marker.textContent = `${String.fromCharCode(65 + index)}.`;
     const text = document.createElement("span");
     text.className = "option-text";
     text.textContent = option;
@@ -136,9 +140,40 @@ function showResults() {
   }
 
   document.getElementById("result-score").textContent = `${score} / ${quiz.questions.length}`;
+  saveFlashcardsButton.disabled = false;
+  saveFlashcardsButton.hidden = false;
+  saveStatus.hidden = true;
+  savedFlashcardsLink.hidden = true;
   showScreen("results");
   document.getElementById("result-title").focus();
 }
+
+saveFlashcardsButton.addEventListener("click", () => {
+  const deck = {
+    id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
+    topic: quiz.topic,
+    difficulty: quiz.difficulty,
+    score,
+    totalQuestions: quiz.questions.length,
+    createdAt: new Date().toISOString(),
+    cards: quiz.questions.map((question) => ({
+      front: question.options[question.answerIndex],
+      back: question.explanation,
+      context: question.question,
+    })),
+  };
+
+  try {
+    window.TeacherAI.flashcards.saveDeck(deck);
+    saveFlashcardsButton.hidden = true;
+    saveStatus.textContent = `Saved ${deck.cards.length} key ideas from “${deck.topic}”.`;
+    saveStatus.hidden = false;
+    savedFlashcardsLink.hidden = false;
+  } catch (error) {
+    saveStatus.textContent = error.message || "Could not save this flashcard deck.";
+    saveStatus.hidden = false;
+  }
+});
 
 quizForm.addEventListener("submit", async (event) => {
   event.preventDefault();

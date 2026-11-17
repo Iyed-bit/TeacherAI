@@ -116,6 +116,29 @@ header h1{
     width: auto;
 }
 
+.open-tracker-tab {
+    align-self: center;
+    margin: -0.75rem auto 1rem;
+    padding: 0.65rem 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-radius: 0.5rem;
+    color: white;
+    background-color: #1f373d;
+    font-size: 0.9rem;
+    letter-spacing: normal;
+    text-align: center;
+    transition: opacity 0.2s ease;
+}
+
+.open-tracker-tab:hover {
+    opacity: 0.82;
+}
+
+.open-tracker-tab:focus-visible {
+    outline: 2px solid white;
+    outline-offset: 3px;
+}
+
 #task-input {
     flex: 1 1 0%;
     padding: 0.75rem 0.5rem;
@@ -153,6 +176,18 @@ input:-internal-autofill-selected{
 
 #task-submit:hover {
     opacity: 0.8;
+}
+
+#task-storage-status {
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto 1rem;
+    color: #ffd1d1;
+    letter-spacing: normal;
+}
+
+.light-mode #task-storage-status {
+    color: #8b1e1e;
 }
 
 main {
@@ -373,4 +408,8 @@ body.light-mode{
 
 .light-mode .clock{
     filter: brightness(0) saturate(100%) invert(19%) sepia(13%) saturate(1328%) hue-rotate(143deg) brightness(91%) contrast(91%);
+}
+
+.light-mode .open-tracker-tab {
+    color: white;
 }

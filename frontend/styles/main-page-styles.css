@@ -28,7 +28,7 @@ body{
   width: 95vw;
   max-width: 1200px;
   margin: 0 auto;
-  font-family: Changa One , impact, sans-serif;
+  font-family: var(--font-family-base);
 }
 .main-title{
   font-size: 45px;
@@ -132,7 +132,6 @@ button{
   background-color:#8D8C65 ;
   color: white;
   width: 150px;
-  margin-left:
 }
 .calculator-button{
   width: 60px;

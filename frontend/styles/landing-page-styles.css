@@ -73,7 +73,7 @@ header{
   font-family: 59px;
 }
 .contact, .products, .about{
-  font-family: arial;
+  font-family: inherit;
   font-weight: medium;
   & a{
     text-decoration: none;

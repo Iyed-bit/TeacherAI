@@ -518,6 +518,39 @@ select {
   margin: 10px 0 24px;
 }
 
+.save-flashcards-button {
+  display: block;
+  max-width: 380px;
+  margin: 0 auto 10px;
+  background: #77774e;
+}
+
+.save-flashcards-button:hover:not(:disabled) {
+  background: #686844;
+}
+
+.save-status {
+  margin: 0 auto 8px;
+  color: #3c815d;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.saved-flashcards-link {
+  display: block;
+  margin: 0 auto 20px;
+  color: #596344;
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+  text-decoration: none;
+}
+
+.saved-flashcards-link:hover {
+  text-decoration: underline;
+}
+
 .result-actions {
   display: grid;
   width: min(100%, 380px);

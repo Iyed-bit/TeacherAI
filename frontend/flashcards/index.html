@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#435152">
+  <title>My Flashcards | TeacherAI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Changa+One&family=Roboto:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/sidebar.css">
+  <link rel="stylesheet" href="../styles/darkmode-toggle.css">
+  <link rel="stylesheet" href="flashcards.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="../styles/typography.css">
+</head>
+<body>
+  <i class="bi bi-brightness-high-fill" id="toggleDark" aria-label="Switch to light mode"></i>
+  <aside class="side-bar" id="app-sidebar" aria-label="Main navigation">
+    <div class="lesson-container" id="ai-container">
+      <a href="../main-page.html" aria-label="Chat Bot">
+        <button type="button" aria-label="Chat Bot"><img src="../images/ai.png" class="ai-icon" alt=""></button>
+      </a>
+      <div class="lesson-text">Chat Bot</div>
+    </div>
+    <div class="last-three">
+      <div class="timer-container">
+        <a href="../timeTracker/home.html" aria-label="Time Tracker">
+          <button type="button" aria-label="Time Tracker"><img src="../images/Frame 1clock.png" class="timer-iconn" alt=""></button>
+        </a>
+        <div class="timer-text">Time Tracker</div>
+      </div>
+      <div class="lesson-container">
+        <a href="../pdfExctraction/public/index.html" aria-label="Lesson Summarizer">
+          <button type="button" aria-label="Lesson Summarizer"><img src="../images/Frame 2lesson.png" class="lesson-iconn" alt=""></button>
+        </a>
+        <div class="lesson-text">Lesson Summarizer</div>
+      </div>
+      <div class="lesson-container">
+        <a href="../quiz/" aria-label="Quiz Generator">
+          <button type="button" aria-label="Quiz Generator"><img src="../images/quizz.png" class="quizz-icon" alt=""></button>
+        </a>
+        <div class="lesson-text">Quiz Generator</div>
+      </div>
+    </div>
+  </aside>
+  <button class="hamburger-button" type="button" aria-label="Toggle navigation" aria-controls="app-sidebar" aria-expanded="false">
+    <span class="hamburger-icon" aria-hidden="true"></span>
+  </button>
+
+  <main class="flashcards-app">
+    <header class="flashcards-header">
+      <a class="brand" href="../index.html" aria-label="TeacherAI home">
+        <img src="../images/whiteTeacherAiTransparent.png" data-theme-light="../images/teacherAiBlueUnderline.png" data-theme-dark="../images/whiteTeacherAiTransparent.png" alt="TeacherAI">
+      </a>
+      <a class="back-link" href="../quiz/">← Back to Quiz Studio</a>
+      <p class="eyebrow">YOUR LITTLE LIBRARY OF “I LEARNED THAT”</p>
+      <h1>My <span>Flashcards</span></h1>
+      <p class="intro">Keep the ideas that stuck. Flip through whenever you need a refresher.</p>
+    </header>
+
+    <section class="library" aria-label="Saved flashcards">
+      <div class="library-heading">
+        <div>
+          <p class="section-kicker">STUDY AT YOUR OWN PACE</p>
+          <h2 id="library-title">Your saved decks</h2>
+        </div>
+        <span class="deck-total" id="deck-total"></span>
+      </div>
+      <div id="storage-error" class="storage-error" role="alert" hidden></div>
+      <div class="empty-state" id="empty-state" hidden>
+        <div class="empty-icon" aria-hidden="true">▤</div>
+        <h3>Your library is ready for its first idea.</h3>
+        <p>Finish a quiz, then save its key ideas here as flashcards.</p>
+        <a class="action-link" href="../quiz/">Make a quiz <span aria-hidden="true">→</span></a>
+      </div>
+      <div class="deck-layout" id="deck-layout" hidden>
+        <aside class="deck-list-panel">
+          <h3>My decks</h3>
+          <div class="deck-list" id="deck-list" aria-label="Choose a flashcard deck"></div>
+        </aside>
+        <div class="study-panel">
+          <div class="study-topline">
+            <div>
+              <p class="section-kicker">NOW STUDYING</p>
+              <h3 id="active-deck-title"></h3>
+            </div>
+            <button class="text-button delete-deck-button" id="delete-deck" type="button">Delete deck</button>
+          </div>
+          <div class="study-progress">
+            <span id="card-position"></span>
+            <span class="known-count" id="known-count"></span>
+          </div>
+          <button class="flashcard" id="flashcard" type="button" aria-label="Reveal flashcard answer">
+            <span class="card-side-label" id="card-side-label">KEY IDEA · TAP TO REVEAL</span>
+            <span class="flashcard-text" id="flashcard-front"></span>
+            <span class="flashcard-context" id="flashcard-context"></span>
+            <span class="flip-hint" id="flip-hint">↻ Tap card to reveal answer</span>
+          </button>
+          <div class="study-controls">
+            <button class="secondary-button" id="previous-card" type="button">← Previous</button>
+            <button class="primary-button" id="mark-known" type="button">I know this ✓</button>
+            <button class="secondary-button" id="next-card" type="button">Next →</button>
+          </div>
+          <button class="shuffle-button" id="shuffle-cards" type="button">↝ Shuffle this deck</button>
+        </div>
+      </div>
+    </section>
+    <p class="footer-note">Little by little, a little becomes a lot. <span aria-hidden="true">✦</span></p>
+  </main>
+
+  <script src="../scripts/flashcard-storage.js"></script>
+  <script src="../scripts/sidebar.js"></script>
+  <script src="../scripts/theme.js"></script>
+  <script src="flashcards.js"></script>
+  <script src="../scripts/time-tracker-widget.js"></script>
+</body>
+</html>
