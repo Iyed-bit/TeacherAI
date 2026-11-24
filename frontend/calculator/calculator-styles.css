@@ -11,18 +11,24 @@
   border-radius: 20px; 
 }
 .gray-button, .yellow-button, .clear-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
   background-color: #4f6465;
   width: 52px;
   height: 52px;
   margin-right: 10px;
   margin-bottom: 10px;
+  padding: 0;
   border-radius: 50%;
   border: none;
   color: white;
   font-size: 25px;
+  line-height: 1;
+  text-align: center;
   cursor: pointer;
   transition: opacity .3s;
-  justify-content: space-between;
 }
 .gray-button:active, .yellow-button:active, .clear-button:active{
   opacity: .3;
