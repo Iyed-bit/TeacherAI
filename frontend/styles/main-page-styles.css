@@ -178,7 +178,7 @@ body.light-mode{
 
 .light-mode .main-output,
 .light-mode .main-input{
-  background-color: #fff;
+  background-color: #f7f3e8;
   color: #1f373d;
 }
 
@@ -197,8 +197,9 @@ body.light-mode{
   position: relative;
 }
 
-.input-container .container{
-  top: calc(100% + 12px) !important;
+.input-container #cal{
+  top: auto !important;
+  bottom: calc(100% + 12px) !important;
   right: 0 !important;
   z-index: 5;
 }

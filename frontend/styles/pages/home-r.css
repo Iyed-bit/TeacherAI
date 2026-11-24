@@ -55,7 +55,7 @@
 }
 
 li a:hover {
-    background: white;
+    background: #f7f3e8;
     border-radius: 20px;
     transition: 0.5s;
 }

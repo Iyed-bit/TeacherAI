@@ -27,7 +27,7 @@ header{
   color: black;
   height: 16.49vh;
   width: 100vw;
-  background-color: white;
+  background-color: #f7f3e8;
   z-index: 99;
 }
 
@@ -277,7 +277,7 @@ body.light-mode{
 }
 
 .light-mode header{
-  background-color: #fff;
+  background-color: #f7f3e8;
 }
 
 .light-mode .header-image{

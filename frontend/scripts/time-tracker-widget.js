@@ -69,8 +69,12 @@
 
       runningTasks.forEach((task) => {
         const item = document.createElement("li");
-        item.textContent = `${task.name}: ${formatElapsedTime(task, now)}`;
-        item.title = item.textContent;
+        const words = task.name.trim().split(/\s+/).filter(Boolean);
+        const taskLabel = words.slice(0, 3).join(" ")
+          + (words.length > 3 ? "…" : "");
+        const elapsedTime = formatElapsedTime(task, now);
+        item.textContent = `- ${elapsedTime}${taskLabel ? `: ${taskLabel}` : ""}`;
+        item.title = `${task.name}: ${elapsedTime}`;
         taskList.appendChild(item);
       });
       if (runningTasks.length === 0) {

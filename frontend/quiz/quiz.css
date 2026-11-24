@@ -207,7 +207,7 @@ select {
   opacity: 0;
 }
 
-.difficulty-option span {
+.difficulty-option > span {
   display: flex;
   min-height: 45px;
   align-items: center;
@@ -232,7 +232,15 @@ select {
 }
 
 .level-emoji {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+  place-items: center;
+  border-radius: 7px;
+  background: #e8e4d1;
   font-size: 15px !important;
+  line-height: 1;
 }
 
 .count-field select {
@@ -577,6 +585,7 @@ select {
 }
 
 body.light-mode {
+  --quiz-gold: #665000;
   color-scheme: light;
   background:
     radial-gradient(ellipse at 50% 0, rgb(141 140 101 / 12%), transparent 50%),
@@ -635,7 +644,7 @@ body.light-mode {
     flex-basis: 43px;
   }
 
-  .difficulty-option span {
+  .difficulty-option > span {
     gap: 3px;
     font-size: 12px;
   }

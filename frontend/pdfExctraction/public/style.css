@@ -190,7 +190,7 @@ body.light-mode{
 
 .light-mode #inpFile{
   color: #1f373d;
-  background-color: #fff;
+  background-color: #f7f3e8;
 }
 
 .light-mode #inpFile::file-selector-button{
@@ -200,7 +200,7 @@ body.light-mode{
 
 .light-mode #resultText,
 .light-mode .summary{
-  background-color: #fff;
+  background-color: #f7f3e8;
   color: #1f373d;
 }
 

@@ -385,7 +385,7 @@ body.light-mode{
 
 .light-mode #task-input,
 .light-mode #task-submit{
-    background-color: #fff;
+    background-color: #f7f3e8;
     color: #1f373d;
 }
 
@@ -394,7 +394,7 @@ body.light-mode{
 }
 
 .light-mode #tasks .task{
-    background-color: #fff;
+    background-color: #f7f3e8;
     color: #1f373d;
 }
 
@@ -404,6 +404,19 @@ body.light-mode{
 
 .light-mode .task .content .text:not(:read-only){
     color: #1f373d;
+}
+
+.light-mode .task .actions .edit,
+.light-mode .task .actions .download {
+    background-color: #e8eef0;
+    border-color: #526365;
+    color: #1f373d;
+}
+
+.light-mode .task .actions .delete {
+    background-color: #4f1a1a;
+    border-color: #4f1a1a;
+    color: #fff;
 }
 
 .light-mode .clock{
