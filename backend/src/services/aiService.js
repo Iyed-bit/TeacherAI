@@ -8,7 +8,7 @@ class AiServiceError extends Error {
   }
 }
 
-async function generateOllamaResponse(content, { format, options } = {}) {
+async function generateOllamaResponse(content, { format, options, systemPrompt } = {}) {
   const baseUrl = (process.env.OLLAMA_BASE_URL || "http://127.0.0.1:11434").replace(/\/+$/, "");
   const model = process.env.OLLAMA_MODEL || "llama3.2:latest";
 
@@ -18,7 +18,10 @@ async function generateOllamaResponse(content, { format, options } = {}) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         model,
-        messages: [{ role: "user", content }],
+        messages: [
+          ...(systemPrompt ? [{ role: "system", content: systemPrompt }] : []),
+          { role: "user", content },
+        ],
         stream: false,
         ...(format ? { format } : {}),
         ...(options ? { options } : {}),
